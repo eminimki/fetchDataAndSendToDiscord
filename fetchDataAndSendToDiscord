@@ -26,3 +26,16 @@ function fetchDataAndSendToDiscord() {
     Logger.log("Hata oluştu: " + error); // Hata mesajını konsola ve günlüğe yazdır
   }
 }
+
+
+function sendDiscordMessage(message, url) {
+  var payload = {
+    "content": message
+  };
+  var options = {
+    "method": "post",
+    "contentType": "application/json",
+    "payload": JSON.stringify(payload)
+  };
+  UrlFetchApp.fetch(url, options);
+}
