@@ -19,7 +19,6 @@ function fetchDataAndSendToDiscord() {
       var message = "Yazdırmak istediniz mesajı buraya yazdırabilirsiniz."; // Verileri biçimlendir
 
       sendDiscordMessage(message, discordWebhookUrl);
-      moveDataDown();
     }
   } catch (error) {
     console.error("Hata oluştu: " + error);
