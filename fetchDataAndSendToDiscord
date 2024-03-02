@@ -1,0 +1,28 @@
+var discordWebhookUrl = 'YOUR_DISCORD_WEBHOOKS_URL';
+
+var sheetId = "YOUR_SHEETS_ID";
+var sheetName = "YOUR_SHEETS_NAME"
+//TODO Veri aralıklarını yazmayı unutmayın..
+var startRow = 9; // Verilerin başlangıç satırı
+var endRow = 9; // Verilerin bitiş satırı
+var dataRange = 'A' + startRow + ':D' + endRow; // Veri aralığı
+
+function fetchDataAndSendToDiscord() {
+  try {
+    var sheet = SpreadsheetApp.openById(sheetId).getSheetByName(sheetName);
+    var data = sheet.getRange(dataRange).getValues();
+
+    // Verileri Discord'a gönder
+    for (var i = 0; i < data.length; i++) {
+      var row = data[i];
+      var formattedDate = formatDate(row[0]); // Tarihi belirtilen formata dönüştür
+      var message = "Yazdırmak istediniz mesajı buraya yazdırabilirsiniz."; // Verileri biçimlendir
+
+      sendDiscordMessage(message, discordWebhookUrl);
+      moveDataDown();
+    }
+  } catch (error) {
+    console.error("Hata oluştu: " + error);
+    Logger.log("Hata oluştu: " + error); // Hata mesajını konsola ve günlüğe yazdır
+  }
+}
